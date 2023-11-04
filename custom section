@@ -1,0 +1,47 @@
+{% for block in section.blocks %}
+   {% assign product = all_products[block.settings.product] %}
+
+  {% for variant in product.variants %}
+    <input type="radio" name="variant" value="{{ variant.id }}"{% if variant == current_variant %}checked="checked"{% endif %}>
+      {{ product.title }} - {{ variant.title }} - {{ variant.price | money }}
+    
+  {% endfor %}
+  <input type='button' name="next1" value="Next" id="next1">
+{% endfor %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#next1").click(function(){
+      const val = $('input[type="radio"]:checked').val();
+if(typeof val === "undefined" || val=='')
+{
+  alert('Please select any one product')
+}
+else
+    {
+      alert(2)
+    }
+  
+  });
+});
+</script>
+{% schema %}
+{
+"name": "Demo",
+"blocks": [
+{
+"type": "new-arrival",
+"name": "New Arrival",
+"settings": [
+{
+"type": "product",
+ "id": "product",
+"label": "Product"
+}
+
+]
+ }
+]
+}
+{% endschema %}
